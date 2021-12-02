@@ -100,6 +100,9 @@ def app():
                     
 
         elif choice== '2':
+            for book in session.query(Book):
+                print(f'{book.id} | {book.title} | {book.author}')
+            input('\nPress Enter to return to the main menu')
             pass
         elif choice== '3':
             pass

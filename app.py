@@ -141,14 +141,17 @@ def app():
                 id_choice = clean_id(id_choice,id_options)
                 if type(id_choice) == int:
                     id_error=False
-            the_book = session.query(Book).filter(Book.id==id_choice)
-            print(f'''\n{the_book.title} by {the_book.author} \rPublished:{the_book.published_date} \rPrice: ${the_book.price/100}''')
+            the_book = session.query(Book).filter(Book.id==id_choice).first()
+            print(f'''\n{the_book.title} by {the_book.author} \nPublished:{the_book.published_date} \nPrice: ${the_book.price/100}''')
+            
+            input('\nPress enter to return to the main menu')
                     
         elif choice== '4':
             pass
         else:
             print('\nGoodbye')
             app_running = False
+
 
 
 

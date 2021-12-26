@@ -188,14 +188,32 @@ def app():
                 the_book.author = edit_check('Author',the_book.author)
                 the_book.published_date = edit_check('Date',the_book.published_date)
                 the_book.price = edit_check('Price',the_book.price)
-                print(session.dirty)
+                session.commit()
+                print('Book updated!')
+                time.sleep(1.5)
+                
             elif sub_choice == '2':
                 # delete
-                pass    
+                session.delete(the_book)
+                session.commit()
+                print('Book Deleted! ')
+                time.sleep(1.5)    
             
                     
         elif choice== '4':
-            pass
+            #Analysis
+            oldest_book = session.query(Book).order_by(Book.published_date).first()
+            newest_book = session.query(Book).order_by(Book.published_date.desc()).first()
+            total_books = session.query(Book).count()
+            python_books = session.query(Book).filter(Book.title.like('%Python%')).count()
+
+            print(f'''
+                  \n******BOOK ANALYSIS*****
+                  \r Oldest book:{oldest_book}
+                  \r Newest book:{newest_book}
+                  \r Total Books:{total_books}
+                  \r Number of python books:{python_books}''')
+            input('\n Press enter to return to the main menu')
         else:
             print('\nGoodbye')
             app_running = False
